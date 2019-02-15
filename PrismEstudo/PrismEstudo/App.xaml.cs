@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using PrismEstudo.Repositorio;
 using PrismEstudo.ViewModels;
 using PrismEstudo.Views;
 using Xamarin.Forms;
@@ -23,13 +24,18 @@ namespace PrismEstudo
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            Massa.CriarMassaDados();
+
+            await NavigationService.NavigateAsync("NavigationPage/ListaProfissionais");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<ListaProfissionais, ListaProfissionaisViewModel>();
+            containerRegistry.RegisterForNavigation<DetalhesProfissional, DetalhesProfissionalViewModel>();
         }
     }
 }

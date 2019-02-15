@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="PrismEstudo.Views.DetalhesProfissional"
+             xmlns:conversor="clr-namespace:PrismEstudo.Converter"
+             Title="{Binding Profissional.Nome}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conversor:DataConverter x:Key="DataConverter"></conversor:DataConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <StackLayout BackgroundColor="White" Padding="10">
+            <Image Source="{Binding Profissional.ImagemPerfil}"></Image>
+            <Label Text="{Binding Profissional.Nome}" TextColor="Black" HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding Profissional.Descricao}" TextColor="Gray" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout BackgroundColor="#E2E2E2" Padding="10">
+            <Label Text="{Binding Profissional.Especialidade}" TextColor="Gray" />
+        </StackLayout>
+
+        <ListView ItemsSource="{Binding Comentarios}" HasUnevenRows="True" SeparatorColor="Gray">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" BackgroundColor="LightGray">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Autor}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="{Binding Data, Converter={StaticResource DataConverter}}" 
+                                   HorizontalOptions="EndAndExpand" TextColor="#CCCCCC"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Descricao}" TextColor="Gray" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
